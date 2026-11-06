@@ -1,304 +1,120 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Manage and organize your tasks">
+    <title>TaskManager | Login</title>
 
-    <title>Task Manager | Dashboard</title>
+    <link rel="stylesheet" href="login.css">
 
-    <link rel="stylesheet" href="./index.css">
-
-    <script type="module" src="./index.js" defer></script>
+    <script type="module" src="login.js" defer></script>
 </head>
 
 <body>
 
-<div class="dashboard">
+    <main class="login-container">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-
+        <!-- BRAND -->
         <div class="brand">
             <div class="brand-logo">T</div>
             <h2>TaskManager</h2>
         </div>
 
-        <div class="sidebar-menu">
 
-            <p class="menu-heading">MENU</p>
+        <!-- LOGIN CARD -->
+        <section class="login-card">
 
-            <a href="#" class="menu-item active">
-                <span class="menu-icon">▦</span>
-                Dashboard
-            </a>
-
-            <a href="#tasks-section" class="menu-item">
-                <span class="menu-icon">☑</span>
-                My Tasks
-            </a>
-
-            <p class="menu-heading account-heading">ACCOUNT</p>
-
-            <button type="button" id="logout" class="menu-item logout">
-                <span class="menu-icon">↪</span>
-                Logout
-            </button>
-
-        </div>
-
-        <div class="sidebar-bottom">
-            <div class="sidebar-bottom-icon">✦</div>
-            <h4>Stay productive!</h4>
-            <p>Plan your work and accomplish your goals.</p>
-        </div>
-
-    </aside>
-
-
-    <!-- MAIN AREA -->
-    <main class="main-content">
-
-        <!-- HEADER -->
-        <header class="header">
-
-            <div class="header-title">
-                <span class="breadcrumb">Workspace / Dashboard</span>
-                <h1>Dashboard</h1>
+            <div class="login-heading">
+                <h1>Welcome back</h1>
+                <p>Sign in to continue to your workspace.</p>
             </div>
 
-            <div class="profile">
 
-                <div class="profile-avatar">U</div>
+            <!-- ERROR MESSAGE -->
+            <div id="error-message" class="message error" role="alert" hidden></div>
 
-                <div class="profile-info">
-                    <span id="user-email">Loading...</span>
-                    <small>My Account</small>
+            <div id="success-message" class="message success" role="status" hidden></div>
+
+
+            <!-- LOGIN FORM -->
+            <form id="login-form">
+
+                <div class="form-group">
+
+                    <label for="email">Email Address</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="username"
+                        required
+                    >
+
                 </div>
 
-            </div>
 
-        </header>
+                <div class="form-group">
 
-
-        <!-- WELCOME -->
-        <section class="welcome-banner">
-
-            <div>
-                <span class="welcome-label">YOUR WORKSPACE</span>
-
-                <h2>Welcome back!</h2>
-
-                <p>
-                    Organize your activities, manage deadlines
-                    and keep track of your progress.
-                </p>
-            </div>
-
-            <div class="welcome-art">✦</div>
-
-        </section>
-
-
-        <!-- STATISTICS -->
-        <section class="stats-grid">
-
-            <div class="stat-card">
-                <div class="stat-top">
-                    <span>Total Tasks</span>
-                    <span class="stat-icon total">▤</span>
-                </div>
-
-                <h2 id="total-count">0</h2>
-                <small>All your tasks</small>
-            </div>
-
-
-            <div class="stat-card">
-                <div class="stat-top">
-                    <span>Pending</span>
-                    <span class="stat-icon pending">◷</span>
-                </div>
-
-                <h2 id="pending-count">0</h2>
-                <small>Tasks awaiting completion</small>
-            </div>
-
-
-            <div class="stat-card">
-                <div class="stat-top">
-                    <span>Completed</span>
-                    <span class="stat-icon completed">✓</span>
-                </div>
-
-                <h2 id="completed-count">0</h2>
-                <small>Successfully completed</small>
-            </div>
-
-
-            <div class="stat-card">
-                <div class="stat-top">
-                    <span>Expired</span>
-                    <span class="stat-icon expired">!</span>
-                </div>
-
-                <h2 id="expired-count">0</h2>
-                <small>Tasks past their deadline</small>
-            </div>
-
-        </section>
-
-
-        <!-- TASK WORKSPACE -->
-        <section class="workspace" id="tasks-section">
-
-
-            <!-- CREATE TASK -->
-            <div class="content-card create-card">
-
-                <div class="card-heading">
-
-                    <div>
-                        <h2>Create New Task</h2>
-                        <p>Enter your task details below.</p>
+                    <div class="password-label">
+                        <label for="password">Password</label>
                     </div>
 
-                    <span class="heading-symbol">＋</span>
-
-                </div>
-
-
-                <form id="task-form">
-
-                    <div class="form-group">
-
-                        <label for="title">Task Title</label>
+                    <div class="password-wrapper">
 
                         <input
-                            type="text"
-                            id="title"
-                            name="title"
-                            placeholder="Enter task title"
-                            maxlength="150"
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
                             required
                         >
 
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="description">Description</label>
-
-                        <textarea
-                            id="description"
-                            name="description"
-                            rows="5"
-                            placeholder="Describe your task..."
-                        ></textarea>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="due-date">Due Date & Time</label>
-
-                        <input
-                            type="datetime-local"
-                            id="due-date"
-                            name="due-date"
-                            required
+                        <button
+                            type="button"
+                            id="toggle-password"
+                            class="toggle-password"
+                            aria-label="Show password"
+                            aria-pressed="false"
                         >
+                            Show
+                        </button>
 
                     </div>
 
+                </div>
 
-                    <button type="submit" class="submit-button">
-                        <span>＋</span>
-                        Add Task
-                    </button>
 
-                </form>
+                <button type="submit" id="login-button" class="login-button">
+                    Sign In
+                </button>
 
+            </form>
+
+
+            <div class="divider">
+                <span>NEW TO TASKMANAGER?</span>
             </div>
 
 
-            <!-- TASK LIST -->
-            <div class="content-card task-card-container">
-
-                <div class="card-heading">
-
-                    <div>
-                        <h2>My Tasks</h2>
-                        <p>View and manage your activities.</p>
-                    </div>
-
-                    <span class="task-heading-icon">☷</span>
-
-                </div>
-
-
-                <!-- FILTER BUTTONS -->
-                <div class="filters">
-
-                    <button
-                        type="button"
-                        class="filter-button active"
-                        data-filter="all"
-                    >
-                        All Tasks
-                    </button>
-
-                    <button
-                        type="button"
-                        class="filter-button"
-                        data-filter="pending"
-                    >
-                        Pending
-                    </button>
-
-                    <button
-                        type="button"
-                        class="filter-button"
-                        data-filter="completed"
-                    >
-                        Completed
-                    </button>
-
-                    <button
-                        type="button"
-                        class="filter-button"
-                        data-filter="expired"
-                    >
-                        Expired
-                    </button>
-
-                </div>
-
-
-                <!-- JAVASCRIPT RENDERS TASKS HERE -->
-                <div id="task-list" class="task-list">
-                    <p class="empty-message">Loading tasks...</p>
-                </div>
-
-            </div>
+            <p class="register-link">
+                Don't have an account?
+                <a href="register.html">Create an account</a>
+            </p>
 
         </section>
 
 
-        <!-- FOOTER -->
-        <footer class="footer">
+        <footer>
             <p>TaskManager &copy; 2026. All rights reserved.</p>
         </footer>
 
     </main>
 
-</div>
-
 </body>
-  </html>
-  
+</html>
