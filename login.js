@@ -127,7 +127,7 @@ loginForm.addEventListener("submit", async event => {
 
         showMessage(
             errorMessage,
-            error
+            error.code
             // messages[error.code] || "Unable to sign in. Please try again."
         );
 
