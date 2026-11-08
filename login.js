@@ -93,7 +93,8 @@ loginForm.addEventListener("submit", async event => {
             email,
             password
         );
-
+        alert("success")
+            
         showMessage(
             successMessage,
             "Login successful. Redirecting..."
