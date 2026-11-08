@@ -125,6 +125,8 @@ loginForm.addEventListener("submit", async event => {
                 "Network error. Check your internet connection."
         };
 
+        alert(error)
+
         showMessage(
             errorMessage,
             error.code
