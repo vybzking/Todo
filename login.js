@@ -93,7 +93,8 @@ loginForm.addEventListener("submit", async event => {
             email,
             password
         );
-        alert("success")
+
+        console.log("success")
             
         showMessage(
             successMessage,
@@ -126,7 +127,7 @@ loginForm.addEventListener("submit", async event => {
                 "Network error. Check your internet connection."
         };
 
-        alert(error)
+        console.log("success")
 
         showMessage(
             errorMessage,
@@ -135,7 +136,7 @@ loginForm.addEventListener("submit", async event => {
         );
 
     } finally {
-
+        console.log("finally")
         loginButton.disabled = false;
         loginButton.textContent = "Sign In";
 
