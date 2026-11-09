@@ -27,6 +27,101 @@ onAuthStateChanged(auth, user => {
         window.location.replace("dashboard.html");
     }
 
+    else{
+        togglePassword.addEventListener("click", () => {
+
+        const visible = passwordInput.type === "password";
+
+        passwordInput.type = visible ? "text" : "password";
+
+        togglePassword.textContent = visible ? "Hide" : "Show";
+
+        togglePassword.setAttribute(
+            "aria-label",
+            visible ? "Hide password" : "Show password"
+        );
+
+        togglePassword.setAttribute(
+            "aria-pressed",
+            String(visible)
+        );
+
+    });
+
+
+    // LOGIN
+    loginForm.addEventListener("submit", async event => {
+
+        event.preventDefault();
+
+        clearMessages();
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        loginButton.disabled = true;
+        loginButton.textContent = "Signing in...";
+
+        try {
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            console.log("success")
+            
+            showMessage(
+                successMessage,
+                "Login successful. Redirecting..."
+            );
+
+            window.location.replace("dashboard.html");
+
+        } catch (error) {
+
+            console.error("Login error:", error);
+
+            const messages = {
+                "auth/invalid-credential":
+                    "Incorrect email or password.",
+
+                "auth/user-not-found":
+                    "No account was found with this email.",
+
+                "auth/wrong-password":
+                    "Incorrect email or password.",
+
+                "auth/invalid-email":
+                    "Please enter a valid email address.",
+
+                "auth/too-many-requests":
+                    "Too many attempts. Please try again later.",
+
+                "auth/network-request-failed":
+                    "Network error. Check your internet connection."
+            };
+
+            console.log("success")
+
+            showMessage(
+                errorMessage,
+                error.code
+                // messages[error.code] || "Unable to sign in. Please try again."
+            );
+
+        } finally {
+            console.log("finally")
+            loginButton.disabled = false;
+            loginButton.textContent = "Sign In";
+
+        }
+
+    });
+
+  }
+
 });
 
 
@@ -52,94 +147,3 @@ function clearMessages() {
 
 
 // PASSWORD VISIBILITY
-togglePassword.addEventListener("click", () => {
-
-    const visible = passwordInput.type === "password";
-
-    passwordInput.type = visible ? "text" : "password";
-
-    togglePassword.textContent = visible ? "Hide" : "Show";
-
-    togglePassword.setAttribute(
-        "aria-label",
-        visible ? "Hide password" : "Show password"
-    );
-
-    togglePassword.setAttribute(
-        "aria-pressed",
-        String(visible)
-    );
-
-});
-
-
-// LOGIN
-loginForm.addEventListener("submit", async event => {
-
-    event.preventDefault();
-
-    clearMessages();
-
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
-
-    loginButton.disabled = true;
-    loginButton.textContent = "Signing in...";
-
-    try {
-
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
-        console.log("success")
-            
-        showMessage(
-            successMessage,
-            "Login successful. Redirecting..."
-        );
-
-        window.location.replace("dashboard.html");
-
-    } catch (error) {
-
-        console.error("Login error:", error);
-
-        const messages = {
-            "auth/invalid-credential":
-                "Incorrect email or password.",
-
-            "auth/user-not-found":
-                "No account was found with this email.",
-
-            "auth/wrong-password":
-                "Incorrect email or password.",
-
-            "auth/invalid-email":
-                "Please enter a valid email address.",
-
-            "auth/too-many-requests":
-                "Too many attempts. Please try again later.",
-
-            "auth/network-request-failed":
-                "Network error. Check your internet connection."
-        };
-
-        console.log("success")
-
-        showMessage(
-            errorMessage,
-            error.code
-            // messages[error.code] || "Unable to sign in. Please try again."
-        );
-
-    } finally {
-        console.log("finally")
-        loginButton.disabled = false;
-        loginButton.textContent = "Sign In";
-
-    }
-
-});
